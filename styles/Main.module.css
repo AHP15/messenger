@@ -1,0 +1,31 @@
+.opened_chat,
+.chat {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 100%;
+  height: calc(100vh - 70px);
+  border: 1px solid white;
+}
+
+.chat {
+  z-index: -1;
+}
+
+.opened_chat {
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .opened_chat,
+  .chat {
+    width: 460px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .opened_chat,
+  .chat {
+    width: calc(100% - 450px);
+  }
+}

@@ -1,0 +1,29 @@
+.nav {
+  position: relative;
+}
+.avatar {
+  border: 2px solid white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  display: none;
+  position: absolute;
+  top: 110%;
+  right: -20px;
+  list-style: none;
+  z-index: 10;
+}
+
+.list li {
+  background-color: white;
+  color: black;
+  padding: 10px;
+}

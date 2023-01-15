@@ -1,0 +1,1 @@
+export const TOGGLE_SELECTED_CHAT = 'selected-chat';

@@ -2,4 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: black;
+  color: white;
+}
+
+.show_list {
+  display: block !important;
+}
+
+.items {
+  flex: 1;
+  overflow-y: scroll;
 }

@@ -1,0 +1,40 @@
+.sidebar {
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-right: 1px solid white;
+}
+
+.btn_container {
+  display: flex;
+}
+
+.btn,
+.clicked {
+  width: 100%;
+  padding: 15px;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: 0.2s;
+}
+
+.clicked {
+  opacity: 0.5;
+}
+
+.btn:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    width: 450px;
+  }
+}
