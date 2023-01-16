@@ -11,7 +11,7 @@ import { StoreProvider, useStore } from '../context/Store';
 
 export default function Home({ user, contacts, chatrooms }) {
   return (
-    <StoreProvider contacts={contacts} chatrooms={chatrooms}>
+    <StoreProvider user={user} contacts={contacts} chatrooms={chatrooms}>
       <Head>
         <title>Chat App</title>
       </Head>
@@ -38,7 +38,9 @@ export async function getServerSideProps(context) {
   // const user = session.user;
   return {
     props: {
-      user: 'test',
+      user: {
+        name: 'user name',
+      },
     },
   }
 }

@@ -1,0 +1,62 @@
+.user_message,
+.message {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  padding: 20px;
+  padding-top: 40px;
+}
+
+.user_message {
+  justify-content: flex-end;
+}
+
+.user_text {
+  background-color: white;
+  color: black;
+}
+
+.text {
+  border: 1px solid white;
+}
+
+.user_text,
+.text {
+  padding: 15px 20px;
+  border-radius: 40px;
+}
+
+.user_name {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.name {
+  left: 10px;
+  position: absolute;
+  top: 10px;
+}
+
+.user_image,
+.image {
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+
+  .user_message,
+  .message {
+    padding: 50px;
+    padding-top: 40px;
+  }
+
+  .user_name {
+    right: 50px;
+  }
+  
+  .name {
+    left: 50px;
+  }
+}

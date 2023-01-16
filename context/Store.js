@@ -26,8 +26,8 @@ const initialState = {
     message: null,
   },
 };
-export const StoreProvider = ({ children, contacts, chatrooms }) => {
-  const [state, dispatch] = useReducer(reducer, {...initialState, contacts, chatrooms});
+export const StoreProvider = ({ children, contacts, chatrooms, user }) => {
+  const [state, dispatch] = useReducer(reducer, {...initialState, contacts, chatrooms, user});
 
   const value = {state, dispatch}
   return (
