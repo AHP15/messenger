@@ -7,6 +7,7 @@ import { useStore } from '../context/Store';
 import { TOGGLE_SELECTED_CHAT } from '../context/contstants';
 import Send from './Send';
 import Message from './Message';
+import Close from './Close';
 
 export default function Main() {
   const { state, dispatch } = useStore();
@@ -82,9 +83,7 @@ export default function Main() {
   }
   return (
     <main className={styles[state.selectedRoom ? 'opened_chat' : 'chat' ]}>
-      <button className={styles.close} onClick={() => dispatch({ type: TOGGLE_SELECTED_CHAT, id: null })}>
-        Close
-      </button>
+      <Close close={() => dispatch({ type: TOGGLE_SELECTED_CHAT, id: null })} />
 
       <h2 className={styles.chat_name}>{chat.name}</h2>
       <div className={styles.chat_messages}>

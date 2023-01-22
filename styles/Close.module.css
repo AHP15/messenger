@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.close {
+  width: 100%;
+  height: 4px;
+  position: relative;
+}
+
+.close::before,
+.close::after {
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  background-color: white;
+}
+
+.close::before {
+  transform: rotate(45deg);
+}
+
+.close::after {
+  transform: rotate(-45deg);
+}

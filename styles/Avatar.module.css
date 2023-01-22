@@ -27,3 +27,11 @@
   color: black;
   padding: 10px;
 }
+
+.signout {
+  cursor: pointer;
+}
+
+.signout:hover {
+  opacity: 0.8;
+}

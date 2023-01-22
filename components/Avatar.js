@@ -24,7 +24,7 @@ const Avatar = ({ name, email, image }) => {
       <ul ref={ulRef} className={styles.list}>
         <li>{name}</li>
         <li>{email}</li>
-        <li onClick={signOut}>SingOut</li>
+        <li className={styles.signout} onClick={signOut}>SingOut</li>
       </ul>
     </nav>
   );

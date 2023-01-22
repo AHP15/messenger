@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: black;
   color: white;
+  font-family: 'Roboto', sans-serif;
 }
 
 .show_list {
@@ -13,4 +16,41 @@
 .items {
   flex: 1;
   overflow-y: scroll;
+}
+
+.model {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 100;
+  transform: scale(0);
+  transition: 0.2s;
+  display: grid;
+  place-items: center;
+}
+
+.model.active {
+  transform: scale(1);
+}
+
+.model_input,
+.btn{
+  padding: 10px;
+  border: 1px solid white;
+  outline: none;
+  margin: 10px;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn:active {
+  opacity: 0.6;
+}
+
+.title {
+  text-align: center;
 }

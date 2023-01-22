@@ -3,68 +3,18 @@ import ChatRooms from "./ChatRooms";
 import Contacts from "./Contacts";
 
 import styles from '../styles/Sidebar.module.css';
+import { useStore } from "../context/Store";
+import {
+  OPEN_MODEL
+} from "../context/contstants";
 
 export default function Sidebar() {
+  const {state, dispatch} = useStore();
   const [show, setShow] = useState('Chatrooms');
-  const staticData = [
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email1@gmail.com',
-      status: 'online',
-    },
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email2@gmail.com',
-      status: 'offline',
-    },
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email3@gmail.com',
-      status: 'online',
-    },
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email4@gmail.com',
-      status: 'offline',
-    },
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email5@gmail.com',
-      status: 'online',
-    },
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email6@gmail.com',
-      status: 'offline',
-    },
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email7@gmail.com',
-      status: 'online',
-    },
-    {
-      avatar: "/favicon.ico",
-      name: 'name',
-      email: 'email8@gmail.com',
-      status: 'offline',
-    },
-  ];
 
-  const staticData2 = [
-    {id: '1', name: 'chat', unreadMessages: 2},
-    {id: '2', name: 'chat', unreadMessages: 5},
-    {id: '3', name: 'chat', unreadMessages: 2},
-    {id: '4', name: 'chat', unreadMessages: 0},
-    {id: '5', name: 'chat', unreadMessages: 1},
-    {id: '6', name: 'chat', unreadMessages: 2},
-  ];
+  const handleNewClick = () => {
+    dispatch({ type: OPEN_MODEL, payload: show });
+  };
   return (
     <aside className={styles.sidebar}>
       <div className={styles.btn_container}>
@@ -80,10 +30,10 @@ export default function Sidebar() {
 
       {
         show === 'Chatrooms'
-        ? <ChatRooms chatrooms={staticData2} />
-        : <Contacts contacts={staticData}/>
+        ? <ChatRooms chatrooms={state.chatrooms} />
+        : <Contacts contacts={state.contacts}/>
       }
-      <button className={styles.btn} type="button">
+      <button onClick={handleNewClick} className={styles.btn} type="button">
         New {show === 'Chatrooms' ? 'Chat' : 'Contact'}
       </button>
     </aside>
