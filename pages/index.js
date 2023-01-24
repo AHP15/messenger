@@ -3,14 +3,14 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { StoreProvider } from '../context/Store';
 
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Model from '../components/Model';
+import { getUser } from '../fetch/requests';
 
-
-export default function Home({ user, contacts, chatrooms }) {
+export default function Home({ user, contacts, chatrooms, error }) {
+  // console.log(user, contacts, chatrooms, error);
   return (
     <StoreProvider user={user} contacts={contacts} chatrooms={chatrooms}>
       <Head>
@@ -35,12 +35,19 @@ export async function getServerSideProps(context) {
       },
     }
   }
-  const user = session.user;
+
+  const { user } = await getUser('http://localhost:3000/api/user', session.user)
+                          .then(data => data);
+
   return {
     props: {
-      user,
-      contacts: [],
-      chatrooms: [],
+      user: {
+        name: user.name,
+        email: user.email,
+        image: user.image,
+      },
+      contacts: user.contacts,
+      chatrooms: user.chats,
     },
   }
 }
