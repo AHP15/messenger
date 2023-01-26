@@ -10,7 +10,6 @@ import Model from '../components/Model';
 import { getUser } from '../fetch/requests';
 
 export default function Home({ user, contacts, chatrooms, error }) {
-  // console.log(user, contacts, chatrooms, error);
   return (
     <StoreProvider user={user} contacts={contacts} chatrooms={chatrooms}>
       <Head>
@@ -38,7 +37,7 @@ export async function getServerSideProps(context) {
 
   const { user } = await getUser('http://localhost:3000/api/user', session.user)
                           .then(data => data);
-
+  
   return {
     props: {
       user: {

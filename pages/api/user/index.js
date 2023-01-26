@@ -5,23 +5,32 @@ export default async function handler(req, res) {
     const DB = await connectDB();
     const User = DB.collection("users");
     const alreadyExists = await User.findOne({ email: req.body.email });
-    
-    if (!alreadyExists) {
-      const data = {
-        ...req.body,
-        contacts: [],
-        chats: [],
-      };
-      const user = await User.insertOne(data);
-      res.send({
-        success: true,
-        user
-      });
-    } else {
-      res.send({
+
+    if (req.method === 'POST') {
+      if (!alreadyExists) {
+        const data = {
+          ...req.body,
+          contacts: [],
+          chats: [],
+        };
+        const user = await User.insertOne(data);
+        return res.send({
+          success: true,
+          user: {
+            id: user.insertedId,
+            ...data
+          },
+        });
+      }
+
+      return res.send({
         success: true,
         user: alreadyExists,
       });
+    }
+
+    if (req.method === 'PUT') {
+
     }
   } catch (err) {
     res.status(500).send({
