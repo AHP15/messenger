@@ -44,6 +44,7 @@ export async function getServerSideProps(context) {
         name: user.name,
         email: user.email,
         image: user.image,
+        id: user.id,
       },
       contacts: user.contacts,
       chatrooms: user.chats,

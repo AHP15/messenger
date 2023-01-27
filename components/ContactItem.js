@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import styles from '../styles/ContactItem.module.css';
 
-const ContactItem = ({ avatar, name, email, status }) => {
+const ContactItem = ({ id, avatar, name, email, status }) => {
   return (
     <div className={styles.contact_item}>
       <div className={styles.contact_avatar}>

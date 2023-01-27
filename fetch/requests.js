@@ -17,16 +17,13 @@ export const getUser = async (url, body) => {
   }
 };
 
-export const postData = async (url, body) => {
+export const request = async (url, options) => {
   try {
-    const res = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
+    const res = await fetch(url, options);
     const data = await res.json();
+    if (!data.success) {
+      throw new Error(data.message)
+    }
     return data;
   } catch (err) {
     return {

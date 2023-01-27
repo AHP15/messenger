@@ -5,7 +5,9 @@ import {
   TOGGLE_SELECTED_CHAT,
   SET_SOCKET,
   OPEN_MODEL,
-  CLOSE_MODEL
+  CLOSE_MODEL,
+  CONTACT_ADDED,
+  ADD_CONTACT_FAILED
 } from './contstants';
 
 const StoreContext = createContext(null);
@@ -36,6 +38,19 @@ const reducer = (state, action) => {
         ...state,
         model: null,
       };
+    case CONTACT_ADDED:
+      const { payload } = action;
+      const { contacts } = state;
+      return {
+        ...state,
+        contacts: [...contacts, payload.contact],
+        alert: {
+          type: 'success',
+          message: payload.message,
+        },
+      };
+    case ADD_CONTACT_FAILED:
+      return {};
     default:
       return state;
   }
