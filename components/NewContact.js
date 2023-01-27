@@ -3,7 +3,8 @@ import { useStore } from '../context/Store';
 import { request } from '../fetch/requests';
 import {
   CONTACT_ADDED,
-  ADD_CONTACT_FAILED
+  ADD_CONTACT_FAILED,
+  ALREADY_CONTACT
 } from '../context/contstants';
 
 import FormLayout from './FormLayout';
@@ -12,11 +13,16 @@ const NewContact = () => {
   const { state, dispatch } = useStore();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+
   const handleSubmit= (e) => {
     e.preventDefault();
 
     if (email === '') return;
-
+  
+    const isAlreadyContact = state.contacts.some(contact => contact.email === email);
+    if (isAlreadyContact) {
+      return dispatch({ type: ALREADY_CONTACT, payload: email });
+    }
     setLoading(true);
     request('/api/user', {
       method: 'PUT',

@@ -7,6 +7,7 @@ import { useStore } from "../context/Store";
 import {
   OPEN_MODEL
 } from "../context/contstants";
+import Alert from "./Alert";
 
 export default function Sidebar() {
   const {state, dispatch} = useStore();
@@ -36,6 +37,7 @@ export default function Sidebar() {
       <button onClick={handleNewClick} className={styles.btn} type="button">
         New {show === 'Chatrooms' ? 'Chat' : 'Contact'}
       </button>
+      {state.alert.type && <Alert type={state.alert.type} message={state.alert.message} />}
     </aside>
   );
 }

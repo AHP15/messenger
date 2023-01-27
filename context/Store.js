@@ -7,7 +7,9 @@ import {
   OPEN_MODEL,
   CLOSE_MODEL,
   CONTACT_ADDED,
-  ADD_CONTACT_FAILED
+  ADD_CONTACT_FAILED,
+  ALREADY_CONTACT,
+  CLEAR_ALERT
 } from './contstants';
 
 const StoreContext = createContext(null);
@@ -51,6 +53,22 @@ const reducer = (state, action) => {
       };
     case ADD_CONTACT_FAILED:
       return {};
+    case ALREADY_CONTACT:
+      return {
+        ...state,
+        alert: {
+          type: 'error',
+          message: `${action.payload} is already a friend`,
+        },
+      };
+    case CLEAR_ALERT:
+      return {
+        ...state,
+        alert: {
+          type: null,
+          message: null,
+        }
+      };
     default:
       return state;
   }

@@ -18,12 +18,6 @@ export default function Main() {
   });
 
   useEffect(() => {
-    if (state.alert.type) {
-      alert(state.alert.message)
-    }
-  }, [state.alert]);
-
-  useEffect(() => {
     const fetchChat = async () => {
       return [
         {
