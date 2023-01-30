@@ -9,3 +9,8 @@ export const ADD_CONTACT_FAILED = 'contact-failed';
 export const ALREADY_CONTACT = 'already-contact';
 
 export const CLEAR_ALERT = 'clear-alert';
+
+export const REQUITED_USER = 'required-user';
+
+export const CHAT_ADDED = 'chat-added';
+export const ADD_CHAT_FAILED = 'chat-failed';

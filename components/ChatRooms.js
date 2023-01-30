@@ -6,8 +6,8 @@ const ChatRooms = ({ chatrooms }) => {
       {
         chatrooms.map(chat => (
           <ChatItem
-            key={chat.id}
-            id={chat.id}
+            key={chat.id ?? chat._id}
+            id={chat.id ?? chat._id}
             name={chat.name}
             unreadMessages={chat.unreadMessages}
           />

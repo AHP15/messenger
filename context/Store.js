@@ -9,7 +9,10 @@ import {
   CONTACT_ADDED,
   ADD_CONTACT_FAILED,
   ALREADY_CONTACT,
-  CLEAR_ALERT
+  CLEAR_ALERT,
+  REQUITED_USER,
+  CHAT_ADDED,
+  ADD_CHAT_FAILED
 } from './contstants';
 
 const StoreContext = createContext(null);
@@ -52,7 +55,13 @@ const reducer = (state, action) => {
         },
       };
     case ADD_CONTACT_FAILED:
-      return {};
+      return {
+        ...state,
+        alert: {
+          type: 'error',
+          message: action.payload.message,
+        },
+      };
     case ALREADY_CONTACT:
       return {
         ...state,
@@ -67,6 +76,33 @@ const reducer = (state, action) => {
         alert: {
           type: null,
           message: null,
+        }
+      };
+    case REQUITED_USER:
+      return {
+        ...state,
+        alert: {
+          type: 'error',
+          message: 'Please add at least one of your contacts',
+        }
+      };
+    case CHAT_ADDED:
+      const { chatrooms } = state;
+      const { chat } = action.data;
+      return {
+        ...state,
+        chatrooms: [...chatrooms, { ...chat, unreadMessages: [] }],
+        alert: {
+          type: 'success',
+          message: 'Chat added successfully',
+        }
+      }
+    case ADD_CHAT_FAILED:
+      return {
+        ...state,
+        alert: {
+          type: 'error',
+          message: action.data.message,
         }
       };
     default:

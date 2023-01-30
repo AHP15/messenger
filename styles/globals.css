@@ -16,6 +16,12 @@
 .items {
   flex: 1;
   overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.items::-webkit-scrollbar {
+  display: none;
 }
 
 .model {
@@ -53,4 +59,25 @@
 
 .title {
   text-align: center;
+}
+
+.check_contact {
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+.check_contact input {
+  margin-right: 5px;
+}
+
+.contact_container {
+  overflow-y: scroll;
+  height: 150px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.contact_container::-webkit-scrollbar {
+  display: none;
 }

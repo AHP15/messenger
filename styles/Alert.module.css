@@ -10,10 +10,17 @@
   animation: show_alert 0.3s linear;
 }
 
-.error p {
+.error p,
+.success p {
   background-color: rgb(215, 86, 86);
   padding: 20px;
   border-radius: 5px;
+}
+
+
+.success p,
+.success {
+  background-color: rgb(98, 187, 98);
 }
 
 @keyframes show_alert {

@@ -46,13 +46,19 @@ export default async function handler(req, res) {
         avatar: contact.image,
         status: contact.status,
       }));
-      const user_chats = [];
       const userInfo = {
         id: alreadyExists[0]._id,
         name: alreadyExists[0].name,
         email: alreadyExists[0].email,
         image: alreadyExists[0].image
       };
+
+      const Chat = DB.collection('chats');
+      const user_chats = await Chat.find({
+        users: {
+          $eq: String(userInfo.id)
+        }
+      }).toArray();
       return res.send({
         success: true,
         user: {

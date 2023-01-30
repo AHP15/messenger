@@ -32,10 +32,11 @@ const NewContact = () => {
       }
     })
     .then((data) => {
-      dispatch({ type: CONTACT_ADDED, payload: data });
-    })
-    .catch((err) => {
-      dispatch({ type: ADD_CONTACT_FAILED, payload: data });
+      if (data.success) {
+        dispatch({ type: CONTACT_ADDED, payload: data });
+      } else {
+        dispatch({ type: ADD_CONTACT_FAILED, payload: data });
+      }
     })
     .finally((data) => {
       setEmail('');
