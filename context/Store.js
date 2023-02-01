@@ -123,16 +123,14 @@ export const StoreProvider = ({ children, contacts, chatrooms, user }) => {
   const [state, dispatch] = useReducer(reducer, {...initialState, contacts, chatrooms, user});
 
   useEffect(() => {
-    /*
     const connection = io('http://localhost:8081');
     dispatch({ type: SET_SOCKET, payload: connection });
-    connection.emit('user', user.email);
+    connection.emit('user', user.id);
 
     return () => {
       connection.disconnect();
       state.socket?.disconnect();
     };
-    */
   }, []);
 
   const value = {state, dispatch}

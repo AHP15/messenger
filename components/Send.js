@@ -2,9 +2,20 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import styles from '../styles/Send.module.css';
+import { useStore } from '../context/Store';
 
-const Send = () => {
+const Send = ({ users }) => {
   const [message, setMessage] = useState('');
+  const { state } = useStore();
+  const { socket, selectedRoom } = state;
+
+  const handleChange = (e) => {
+    socket.emit('typing', {
+      chatId: selectedRoom,
+      users,
+    });
+    setMessage(e.target.value);
+  }
 
   return (
     <form className={styles.chat_form}>
@@ -15,7 +26,7 @@ const Send = () => {
           id="message"
           placeholder="Type your message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={handleChange}
         />
       </div>
       <div className={styles.image}>

@@ -5,6 +5,7 @@ import styles from '../styles/Main.module.css';
 
 import { useStore } from '../context/Store';
 import { TOGGLE_SELECTED_CHAT } from '../context/contstants';
+import { request } from '../fetch/requests';
 import Send from './Send';
 import Message from './Message';
 import Close from './Close';
@@ -15,57 +16,33 @@ export default function Main() {
     pending: true,
     messages: [],
     name: '',
+    users: [],
   });
+  const [typing, setTyping] = useState(false);
 
   useEffect(() => {
-    const fetchChat = async () => {
-      return [
-        {
-          id: '1',
-          user: "user name",
-          image: "/favicon.ico",
-        },
-        {
-          id: '2',
-          user: "user name1",
-          text: "message text message text message text",
-        },
-        {
-          id: '3',
-          user: "user name",
-          image: "/favicon.ico",
-        },
-        {
-          id: '4',
-          user: "user name1",
-          text: "message text message text message text",
-        },
-        {
-          id: '5',
-          user: "user name",
-          text: "message text message text message text",
-        },
-        {
-          id: '6',
-          user: "user name",
-          text: "message text message text message text",
-        },
-        {
-          id: '8',
-          user: "user name1",
-          image: "/favicon.ico",
-        },
-        {
-          id: '7',
-          user: "user name1",
-          text: "message text message text message text",
-        },
-      ];
-    }
-    fetchChat().then(messages => setChat(
-      { messages, name: 'chat name', pending: false }
-    ));
-  }, []);
+
+    if (!state.selectedRoom) return;
+
+    request('/api/chat', {
+      method: 'GET',
+      headers: {
+        'Contect-Type': 'application/json',
+        'id': state.selectedRoom,
+      },
+    }).then(data => {
+      if (data.success) {
+        setChat({
+          pending: false,
+          messages: data.chat.messages,
+          name: data.chat.name,
+          users: data.chat.users,
+        });
+      }
+    });
+
+    state.socket.on('typing-received', () => setTyping(true));
+  }, [state.selectedRoom, state.socket]);
 
   if (chat.pending) {
     return (
@@ -98,8 +75,10 @@ export default function Main() {
             />
           ))
         }
+
+        {typing && <p>Typing</p>}
       </div>
-      <Send />
+      <Send users={chat.users}/>
     </main>
   );
 }
