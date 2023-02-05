@@ -14,3 +14,7 @@ export const REQUITED_USER = 'required-user';
 
 export const CHAT_ADDED = 'chat-added';
 export const ADD_CHAT_FAILED = 'chat-failed';
+
+export const ADD_UNREAD_MESSAGE = 'add-unread-messsage';
+
+export const CLEAR_PREV_CHAT = 'clear-prev-chat';

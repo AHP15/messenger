@@ -13,6 +13,8 @@ import {
   REQUITED_USER,
   CHAT_ADDED,
   ADD_CHAT_FAILED,
+  ADD_UNREAD_MESSAGE,
+  CLEAR_PREV_CHAT
 } from './contstants';
 
 const StoreContext = createContext(null);
@@ -27,6 +29,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedRoom: action.id,
+        clearChat: false,
+        chatrooms: state.chatrooms.map(chat => {
+          if (chat._id === action.id) {
+            return {
+              ...chat,
+              unreadMessages: 0
+            }
+          }
+          return chat;
+        })
+      };
+    case CLEAR_PREV_CHAT:
+      return {
+        ...state,
+        clearChat: true,
       };
     case SET_SOCKET:
       return {
@@ -105,6 +122,20 @@ const reducer = (state, action) => {
           message: action.data.message,
         }
       };
+    case ADD_UNREAD_MESSAGE:
+      const chats = state.chatrooms;
+      return {
+        ...state,
+        chatrooms: chats.map(chat => {
+          if (chat._id === action.id) {
+            return {
+              ...chat,
+              unreadMessages: chat.unreadMessages + 1
+            }
+          }
+          return chat;
+        })
+      };
     default:
       return state;
   }
@@ -118,6 +149,7 @@ const initialState = {
   },
   socket: null,
   model: null,
+  clearChat: false,
 };
 export const StoreProvider = ({ children, contacts, chatrooms, user }) => {
   const [state, dispatch] = useReducer(reducer, {...initialState, contacts, chatrooms, user});

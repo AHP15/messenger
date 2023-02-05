@@ -23,6 +23,17 @@ export default function Main() {
   const messagesRef = useRef();
 
   useEffect(() => {
+    if (state.clearChat) {
+      setChat({
+        pending: true,
+        messages: [],
+        name: '',
+        users: [],
+      });
+    }
+  }, [state.clearChat]);
+
+  useEffect(() => {
     if (!messagesRef.current) return;
 
     messagesRef.current.scrollTo({
@@ -56,7 +67,8 @@ export default function Main() {
 
     state.socket.on('typing-received', () => setTyping(true));
     state.socket.on('typing-ended-reveived', () => setTyping(false));
-    state.socket.on('message-received', () => {})
+    state.socket.on('message-received', () => {});
+
   }, [state.selectedRoom, state.socket]);
 
   if (chat.pending) {
@@ -72,7 +84,8 @@ export default function Main() {
         </div>
       </div>
     );
-  }
+  };
+
   return (
     <main className={styles[state.selectedRoom ? 'opened_chat' : 'chat' ]}>
       <Close close={() => dispatch({ type: TOGGLE_SELECTED_CHAT, id: null })} />

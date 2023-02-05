@@ -9,7 +9,7 @@ import Main from '../components/Main';
 import Model from '../components/Model';
 import { getUser } from '../fetch/requests';
 
-export default function Home({ user, contacts, chatrooms, error }) {
+export default function Home({ user, contacts, chatrooms }) {
   return (
     <StoreProvider user={user} contacts={contacts} chatrooms={chatrooms}>
       <Head>
@@ -47,7 +47,7 @@ export async function getServerSideProps(context) {
         id: user.id,
       },
       contacts: user.contacts,
-      chatrooms: user.chats,
+      chatrooms: user.chats.map(chat => ({ ...chat, unreadMessages: 0 })),
     },
   }
 }
