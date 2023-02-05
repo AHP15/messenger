@@ -1,0 +1,40 @@
+.chat_item {
+  display: flex;
+  padding: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+  transition: 0.2s;
+}
+
+.chat_item:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.new_messages {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  align-items: center;
+  background-color: green;
+  overflow: hidden;
+  animation: animate-new 0.3s linear;
+}
+
+.new_messages p {
+  font-size: 13px;
+  background-color: green;
+  text-align: center;
+}
+
+@keyframes animate-new {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
