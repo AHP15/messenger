@@ -12,7 +12,7 @@ import {
   CLEAR_ALERT,
   REQUITED_USER,
   CHAT_ADDED,
-  ADD_CHAT_FAILED
+  ADD_CHAT_FAILED,
 } from './contstants';
 
 const StoreContext = createContext(null);

@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import styles from '../styles/Send.module.css';
 import { useStore } from '../context/Store';
 
-const Send = ({ users }) => {
+const Send = ({ users, addMessage }) => {
   const [message, setMessage] = useState('');
-  const { state } = useStore();
-  const { socket, selectedRoom } = state;
+  const inputRef = useRef();
+  const { dispatch, state } = useStore();
+  const { socket, selectedRoom, user } = state;
 
   const handleChange = (e) => {
     socket.emit('typing', {
@@ -17,8 +18,39 @@ const Send = ({ users }) => {
     setMessage(e.target.value);
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      user: user.name,
+      text: message,
+      image: null,
+    };
+    socket.emit('message', {
+      chatId: selectedRoom,
+      users,
+      message: data,
+    });
+    addMessage(data);
+    setMessage('');
+  };
+
+  useEffect(() => {
+    const handleFocus = (e) => {
+      socket.emit('typing-ended', {
+        chatId: selectedRoom,
+        users,
+      });
+    }
+    const input = inputRef.current;
+    inputRef.current.addEventListener('focusout', handleFocus);
+
+    return () => {
+      input.removeEventListener('focusout', handleFocus);
+    }
+  }, []);
+
   return (
-    <form className={styles.chat_form}>
+    <form className={styles.chat_form} onSubmit={handleSubmit}>
       <div className={styles.text}>
         <label htmlFor="message" hidden>Type your message</label>
         <input
@@ -27,6 +59,7 @@ const Send = ({ users }) => {
           placeholder="Type your message"
           value={message}
           onChange={handleChange}
+          ref={inputRef}
         />
       </div>
       <div className={styles.image}>

@@ -1,0 +1,36 @@
+.loading {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100px;
+  padding-left: 10px;
+}
+
+.loading p {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.loading_1 {
+  animation: move-anime 0.3s infinite linear alternate;
+}
+
+.loading_2 {
+  animation: move-anime 0.5s infinite linear alternate;
+}
+
+.loading_3 {
+  animation: move-anime 0.7s infinite linear alternate;
+}
+
+@keyframes move-anime {
+  from {
+    margin-bottom: 30px;
+  }
+  to {
+    margin-bottom: 10px;
+  }
+}

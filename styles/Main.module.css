@@ -42,6 +42,12 @@
 .chat_messages {
   flex: 1;
   overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.chat_messages::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 768px) {
