@@ -148,7 +148,6 @@ export const StoreProvider = ({ children, contacts, chatrooms, user }) => {
   const [state, dispatch] = useReducer(reducer, {...initialState, contacts, chatrooms, user});
 
   useEffect(() => {
-    console.log(process.env.NEXT_PUBLIC_SOCKET_URL)
     const connection = io(process.env.NEXT_PUBLIC_SOCKET_URL);
     dispatch({ type: SET_SOCKET, payload: connection });
     connection.emit('user', user.id);
