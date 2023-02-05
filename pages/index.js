@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
     }
   }
 
-  const { user } = await getUser('http://localhost:3000/api/user', session.user)
+  const { user } = await getUser('/api/user', session.user)
                           .then(data => data);
   
   return {
