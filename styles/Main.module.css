@@ -52,14 +52,18 @@
 
 @media (min-width: 768px) {
   .opened_chat,
-  .chat {
+  .chat,
+  .load,
+  .opened_load {
     width: 460px;
   }
 }
 
 @media (min-width: 1024px) {
   .opened_chat,
-  .chat {
+  .chat,
+  .load,
+  .opened_load {
     width: calc(100% - 450px);
   }
 }

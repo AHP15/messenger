@@ -7,7 +7,6 @@ const ChatItem = ({ id, name, unreadMessages }) => {
 
   const { dispatch } = useStore();
   const handleClick = () => {
-    dispatch({ type: CLEAR_PREV_CHAT })
     dispatch({ type: TOGGLE_SELECTED_CHAT, id });
   }
   return (

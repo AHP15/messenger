@@ -29,7 +29,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedRoom: action.id,
-        clearChat: false,
         chatrooms: state.chatrooms.map(chat => {
           if (chat._id === action.id) {
             return {
@@ -39,11 +38,6 @@ const reducer = (state, action) => {
           }
           return chat;
         })
-      };
-    case CLEAR_PREV_CHAT:
-      return {
-        ...state,
-        clearChat: true,
       };
     case SET_SOCKET:
       return {
@@ -127,7 +121,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         chatrooms: chats.map(chat => {
-          if (chat._id === action.id) {
+          if (chat._id === action.id && chat._id !== state.selectedRoom) {
             return {
               ...chat,
               unreadMessages: chat.unreadMessages + 1
@@ -149,13 +143,13 @@ const initialState = {
   },
   socket: null,
   model: null,
-  clearChat: false,
 };
 export const StoreProvider = ({ children, contacts, chatrooms, user }) => {
   const [state, dispatch] = useReducer(reducer, {...initialState, contacts, chatrooms, user});
 
   useEffect(() => {
-    const connection = io('http://localhost:8081');
+    console.log(process.env.NEXT_PUBLIC_SOCKET_URL)
+    const connection = io(process.env.NEXT_PUBLIC_SOCKET_URL);
     dispatch({ type: SET_SOCKET, payload: connection });
     connection.emit('user', user.id);
 

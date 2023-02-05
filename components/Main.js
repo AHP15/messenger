@@ -23,17 +23,6 @@ export default function Main() {
   const messagesRef = useRef();
 
   useEffect(() => {
-    if (state.clearChat) {
-      setChat({
-        pending: true,
-        messages: [],
-        name: '',
-        users: [],
-      });
-    }
-  }, [state.clearChat]);
-
-  useEffect(() => {
     if (!messagesRef.current) return;
 
     messagesRef.current.scrollTo({
@@ -47,6 +36,13 @@ export default function Main() {
   useEffect(() => {
 
     if (!state.selectedRoom) return;
+
+    setChat({
+      pending: true,
+      messages: [],
+      name: '',
+      users: [],
+    });
 
     request('/api/chat', {
       method: 'GET',
@@ -67,21 +63,16 @@ export default function Main() {
 
     state.socket.on('typing-received', () => setTyping(true));
     state.socket.on('typing-ended-reveived', () => setTyping(false));
-    state.socket.on('message-received', () => {});
+    state.socket.on('message-received', ({chatId, message}) => {
+      setChat(prev => ({ ...prev, messages: prev.messages.concat(message) }))
+    });
 
   }, [state.selectedRoom, state.socket]);
 
   if (chat.pending) {
     return (
       <div className={styles[state.selectedRoom ? 'opened_load' : 'load' ]}>
-        <div>
-          <Image
-            src="/loading.gif"
-            width="70"
-            height="70"
-            alt="loading"
-          />
-        </div>
+        <Loading />
       </div>
     );
   };
