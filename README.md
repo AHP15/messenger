@@ -52,7 +52,7 @@ After you're finished please remove all the comments and instructions!
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [your_project_name] <a name="about-project"></a>
+# 📖 [Chat App] <a name="about-project"></a>
 
 
 **[Chat app]** is a real time messaging app with user authentication and multi chatrooms support
